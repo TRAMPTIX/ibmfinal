@@ -200,16 +200,37 @@ app.layout = html.Div(children=[
                                         
                                   ]),  # four column Div
                                    
-                     html.Div(className='eight columns div-for-charts bg-grey',  # Define the right element
+                           html.Div(className='eight columns div-for-charts bg-grey',  # Define the right element
                                     style={'background-image':'url("/assets/agriculture.png")','height':150,'width':1300},
                                     children = [
                                     html.H2('Precision Agriculture', style = {'text-align':'center', "padding-top": "10px", 
                                                                     'font-size': '35px', 'color': 'red'}),
+                                     
+                                    html.H2('Data visualization:', style = {"padding-top": "80px", 
+                                                                "padding-left": "0",'font-size': '25px'
+                                                                }),
                                     
-                                    
-                                   
+                                    html.Div([
+                                        dcc.Dropdown(
+                                                   id="drop_down",
+                                                   options=[
+                                                       {'label': 'Categorical graph', 'value': 'graph'},
+                                                       {'label': 'Data table', 'value': 'table'},
+                                                   ],
+                                                   style={'height':30, 'width':600},
+                                                   value='graph',
+                                                   clearable=False)
+                                            ]),
                                     html.Br(),
-                                   
+                                    html.Div([
+                                    dcc.Graph(id='data_visualization',
+                                              config={'displaylogo': False},
+                                              style={'height':550,'width':1200},
+                                              #animate=True,
+                                              #figure = build_fig(vis_df)
+                                              )
+                                            ]),
+                                    
                                     html.Div([
                                         html.Div([ 
                                             html.H2('Prediction will be displayed here:', style = {"padding-top": "0px", 'font-size': '25px'}),
@@ -224,11 +245,29 @@ app.layout = html.Div(children=[
                                    ]),  # eight column Div
                            html.Br(),html.Br(),html.Br()
                                
-                          ]) # row Div      
+                          ]) # row Div
                     ]) # main Div
 
 
-
+@app.callback(Output("data_visualization", "figure"),
+              Input('drop_down', 'value'),
+              )
+def dropdown_options(drop_value):
+    data_df = pd.read_csv(DATA_PATH)
+    fig_table = table_fig(data_df)
+    
+    mod_df = crop_id_col(df = data_df)
+    vis_df = data_grouping(mod_df)
+    fig_graph = build_fig(vis_df)
+    
+    if drop_value == 'table':
+        return fig_table
+    
+    if drop_value == 'graph':
+        return fig_graph
+    
+    else:
+        dash.no_update
 
 @app.callback(Output("store_inputs", "data"),
               [Input('N', 'value'),
