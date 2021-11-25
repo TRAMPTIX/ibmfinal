@@ -210,17 +210,7 @@ app.layout = html.Div(children=[
                                                                 "padding-left": "0",'font-size': '25px'
                                                                 }),
                                     
-                                    html.Div([
-                                        dcc.Dropdown(
-                                                   id="drop_down",
-                                                   options=[
-                                                       {'label': 'Categorical graph', 'value': 'graph'},
-                                                       {'label': 'Data table', 'value': 'table'},
-                                                   ],
-                                                   style={'height':30, 'width':600},
-                                                   value='graph',
-                                                   clearable=False)
-                                            ]),
+                                   
                                     html.Br(),
                                    
                                     html.Div([
