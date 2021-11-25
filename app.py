@@ -249,25 +249,7 @@ app.layout = html.Div(children=[
                     ]) # main Div
 
 
-@app.callback(Output("data_visualization", "figure"),
-              Input('drop_down', 'value'),
-              )
-def dropdown_options(drop_value):
-    data_df = pd.read_csv(DATA_PATH)
-    fig_table = table_fig(data_df)
-    
-    mod_df = crop_id_col(df = data_df)
-    vis_df = data_grouping(mod_df)
-    fig_graph = build_fig(vis_df)
-    
-    if drop_value == 'table':
-        return fig_table
-    
-    if drop_value == 'graph':
-        return fig_graph
-    
-    else:
-        dash.no_update
+
 
 @app.callback(Output("store_inputs", "data"),
               [Input('N', 'value'),
