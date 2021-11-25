@@ -205,10 +205,7 @@ app.layout = html.Div(children=[
                                     children = [
                                     html.H2('Precision Agriculture', style = {'text-align':'center', "padding-top": "10px", 
                                                                     'font-size': '35px', 'color': 'red'}),
-                                     
-                                    html.H2('Data visualization:', style = {"padding-top": "80px", 
-                                                                "padding-left": "0",'font-size': '25px'
-                                                                }),
+                                    
                                     
                                    
                                     html.Br(),
