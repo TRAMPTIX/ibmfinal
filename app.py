@@ -200,7 +200,44 @@ app.layout = html.Div(children=[
                                         
                                   ]),  # four column Div
                                    
-                           
+                     html.Div(className='eight columns div-for-charts bg-grey',  # Define the right element
+                                    style={'background-image':'url("/assets/agriculture.png")','height':150,'width':1300},
+                                    children = [
+                                    html.H2('Precision Agriculture', style = {'text-align':'center', "padding-top": "10px", 
+                                                                    'font-size': '35px', 'color': 'red'}),
+                                     
+                                    html.H2('Data visualization:', style = {"padding-top": "80px", 
+                                                                "padding-left": "0",'font-size': '25px'
+                                                                }),
+                                    
+                                    html.Div([
+                                        dcc.Dropdown(
+                                                   id="drop_down",
+                                                   options=[
+                                                       {'label': 'Categorical graph', 'value': 'graph'},
+                                                       {'label': 'Data table', 'value': 'table'},
+                                                   ],
+                                                   style={'height':30, 'width':600},
+                                                   value='graph',
+                                                   clearable=False)
+                                            ]),
+                                    html.Br(),
+                                   
+                                    html.Div([
+                                        html.Div([ 
+                                            html.H2('Prediction will be displayed here:', style = {"padding-top": "0px", 'font-size': '25px'}),
+                                            
+                                            html.Img(id = "prediction_image")
+                                            
+                                        ], className="six columns"),
+                                        
+                                        html.Div(id='crop_name', className="six columns"),
+                                    ], className="row"),
+                                        
+                                   ]),  # eight column Div
+                           html.Br(),html.Br(),html.Br()
+                               
+                          ]) # row Div      
                     ]) # main Div
 
 
